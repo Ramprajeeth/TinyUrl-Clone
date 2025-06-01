@@ -15,7 +15,7 @@ const handleShorten=async(e)=>{
 const username = localStorage.getItem('username');
   e.preventDefault();
 
-const urlPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}([\/\w.-]*)*\/?$/;
+const urlPattern = /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/;
 
 if (!longUrl || !urlPattern.test(longUrl.trim())) {
   setToastMsg('Please enter a valid URL');
