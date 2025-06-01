@@ -3,6 +3,7 @@ import api from '../api/axiosconfig.js'
 import { useState } from 'react';
 import { Container,Form,Button,Card } from 'react-bootstrap';
 import ToastNotify from '../components/toastNotify';
+import ModalConfirm from '../components/modal.jsx';
 
 const ShortenPage = () => {
 
@@ -10,6 +11,7 @@ const [shortUrl,setShortUrl]=useState('');
 const [longUrl,setLongUrl]=useState('');
 const [showToast,setShowToast]=useState(false);
 const [toastMsg,setToastMsg]=useState('');
+const [showModal, setShowModal] = useState(false);
 
 const handleShorten=async(e)=>{
 const username = localStorage.getItem('username');
@@ -97,9 +99,15 @@ const handleDelete=async()=>{
 
       <div className='d-flex justify-content-end gap-3 p-3'>
       <Button className='bg-info mr-2 border-0' onClick={handleShare}>Share</Button>
-      <Button className='bg-danger border-0' onClick={handleDelete}>Delete</Button></div>
+      <Button className='bg-danger border-0' onClick={()=>setShowModal(true)}>Delete</Button></div>
       </Card>)}
       <ToastNotify show={showToast} setShow={setShowToast} msg={toastMsg}/>
+        <ModalConfirm show={showModal} onHide={() => setShowModal(false)} 
+  onConfirm={() => {
+    handleDelete();
+    setShowModal(false);
+  }}
+  title="Confirm Delete" body="Are you sure you want to delete this link?"/>
     </Container>
   )
 }

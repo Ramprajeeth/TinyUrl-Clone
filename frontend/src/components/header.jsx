@@ -33,7 +33,7 @@ const Header = ({loggedIn,setLoggedIn}) => {
             {
                 !loggedIn &&(
                     <>
-                    <Nav.Link as={Link} to='/login' className='mx-2 text-warning'>Login</Nav.Link>
+                    <Nav.Link as={Link} to='/login' className='mx-2 text-warning text'>Login</Nav.Link>
                     <Nav.Link as={Link} to='/register' className='mx-2 text-warning'>Register</Nav.Link>
                     </>
                 )
