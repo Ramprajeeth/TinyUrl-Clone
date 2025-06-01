@@ -2,10 +2,13 @@ import React from 'react'
 import { Card,Button } from 'react-bootstrap'
 import ToastNotify from './toastNotify'
 import api from '../api/axiosconfig.js'
+import ModalConfirm from './modal.jsx'
+import { useState } from 'react'
 
 
 const Urlcard = ({longUrl, shortUrl,setShowToast,setToastMsg,onDelete}) => {
 const username = localStorage.getItem('username');
+const [showModal, setShowModal] = useState(false);
   const handleShare=async()=>{
   const shareData={
     url:shortUrl
@@ -57,8 +60,13 @@ const handleDelete=async()=>{
 
         <div className='d-flex justify-content-end gap-3'>
         <Button className='bg-info mr-2 border-0 ' onClick={handleShare}>Share</Button>
-        <Button className='bg-danger border-0' onClick={handleDelete}>Delete</Button></div>
+        <Button className='bg-danger border-0' onClick={()=>setShowModal(true)}>Delete</Button></div>
         </Card.Body>
+      <ModalConfirm show={showModal} onHide={() => setShowModal(false)} onConfirm={() => {
+    handleDelete();
+    setShowModal(false);
+  }}
+  title="Confirm Delete" body="Are you sure you want to delete this link?"/>
     </Card>
   )
 }
