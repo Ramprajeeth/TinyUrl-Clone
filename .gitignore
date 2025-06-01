@@ -1,4 +1,21 @@
-.DS_Store
+# Node modules (for frontend)
+node_modules/
+
+# Java (Spring Boot)
+target/
+*.class
+*.jar
+*.war
+*.log
+
+# Environment variables
+.env
+frontend/.env
+backend/.env
+
+# IDE/editor settings
 .idea/
 .vscode/
 
+# OS-specific
+.DS_Store
