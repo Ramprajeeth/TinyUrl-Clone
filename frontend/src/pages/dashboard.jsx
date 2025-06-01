@@ -38,6 +38,8 @@ const username = localStorage.getItem('username');
     },[search,urls])
 
     const handleDelete=(code)=>{
+        const confirmDelete = window.confirm("Are you sure you want to delete this URL?");
+        if (!confirmDelete) return;
         const updated=urls.filter((url)=>url.shortCode!==code)
         setUrls(updated)
         setFilteredUrls(updated)

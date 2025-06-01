@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Alert,Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import api from '../api/axiosconfig.js'
@@ -31,40 +31,60 @@ const RegisterPage = () => {
   }
 
   return (
-      <Container className='mt-4 px-3 px-md-5'>
-        <h2 className='display-6 text-center p-4 mt-5 pt-5'>Register</h2>
-  {err && <Alert className='mt-2 px-3 w-75 w-md-50 w-lg-50 mx-auto' variant='danger'>{err}</Alert>}
-        <Form className='mt-2 px-3 w-75 w-md-50 w-lg-50 mx-auto' onSubmit={handleRegister}>
-          <Form.Group className='mb-4'>
-            <Form.Label className='fw-bold'>Username</Form.Label>
-            <Form.Control className='form-control-lg shadow-sm'
+    <Container fluid className="d-flex align-items-center justify-content-center vh-100 bg-light">
+      <Card className="p-4 p-md-5 shadow-lg rounded-4 bg-white" style={{ width: '100%', maxWidth: '420px' }}>
+        <h2 className="text-center mb-4 fw-bold text-success">Create an Account</h2>
+        {err && (
+          <Alert className="text-center" variant="danger">
+            {err}
+          </Alert>
+        )}
+
+        <Form onSubmit={handleRegister}>
+          <Form.Group className="mb-3">
+            <Form.Label className="fw-semibold">Username</Form.Label>
+            <Form.Control
+              className="form-control-lg"
               type="text"
               placeholder="Enter username"
               value={user}
-              onChange={(e)=>setUser(e.target.value)}
+              onChange={(e) => setUser(e.target.value)}
               required
             />
           </Form.Group>
-            <Form.Label className='fw-bold'>Password</Form.Label>
-            <Form.Control className='form-control-lg shadow-sm'
+
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold">Password</Form.Label>
+            <Form.Control
+              className="form-control-lg"
               type="password"
               placeholder="Enter password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
-  
-          <Form.Group className='text-center p-4'>
-            <Button className='border-0' variant='success' type='submit'>Register</Button>
           </Form.Group>
+
+          <div className="d-grid">
+            <Button variant="success" size="lg" type="submit" className="shadow-sm">
+              Register
+            </Button>
+          </div>
         </Form>
-        <p className="mt-3 text-center text-success">
-        Already have an account?
-        <Link to="/login" className='text-decoration-none'>Login here</Link>
-      </p>
-      <ToastNotify show={showToast} setShow={setShowToast} msg={toastMsg}/>
-      </Container>
-    )
+
+        <div className="text-center mt-3">
+          <small className="text-muted">
+            Already have an account?{' '}
+            <Link to="/login" className="text-info text-decoration-none">
+              Login here
+            </Link>
+          </small>
+        </div>
+
+        <ToastNotify show={showToast} setShow={setShowToast} msg={toastMsg} />
+      </Card>
+    </Container>
+  );
 }
 
 export default RegisterPage
